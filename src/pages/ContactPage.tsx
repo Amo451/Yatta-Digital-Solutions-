@@ -42,7 +42,7 @@ export function ContactPage() {
                 <div className="card-tech">
                   <Phone className="w-6 h-6 text-brand-400 mb-3" />
                   <h3 className="text-white font-semibold mb-1">Call Us</h3>
-                  <p className="text-slate-400 text-sm">+1 (555) 010-2025</p>
+                  <p className="text-slate-400 text-sm">0769590032</p>
                 </div>
               </Reveal>
               <Reveal delay={160}>
@@ -50,7 +50,7 @@ export function ContactPage() {
                   <MapPin className="w-6 h-6 text-brand-400 mb-3" />
                   <h3 className="text-white font-semibold mb-1">Visit Us</h3>
                   <p className="text-slate-400 text-sm">
-                    100 Innovation Drive
+                    Athi River, Mavoko
                     <br />
                     Tech District, TD 10001
                   </p>
