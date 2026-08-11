@@ -42,13 +42,13 @@ export function HomePage() {
             </div>
 
             <h1 className="text-5xl md:text-7xl font-bold text-white leading-[1.05] mb-6 text-balance animate-fade-up">
-              We build the <span className="text-gradient-blue">technology</span> that
-              <br className="hidden md:block" /> powers your business.
+              What if your <span className="text-gradient-blue">software</span> anticipated
+             <br className="hidden md:block" /> you?
             </h1>
 
             <p className="text-lg md:text-xl text-slate-400 max-w-2xl mb-10 leading-relaxed animate-fade-up" style={{ animationDelay: '100ms' }}>
-              Yatta Digital Solutions delivers AI-powered systems, intelligent automation, and custom
-              software that helps ambitious companies scale with precision and confidence.
+             Yatta embeds intelligence into the background of your business, quietly connecting dots your team
+              hasn't seen yet, flagging anomalies before they become fires, and automating the repetitive so your people can do the remarkable.
             </p>
 
             <div className="flex flex-col sm:flex-row items-start gap-4 animate-fade-up" style={{ animationDelay: '200ms' }}>
