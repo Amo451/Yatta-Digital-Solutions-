@@ -36,6 +36,11 @@ const industryIcons: Record<string, React.ComponentType<{ className?: string; si
   education: GraduationCap,
 };
 
+// Fallback icon component - used if an icon is missing
+const FallbackIcon = ({ className = '' }: { className?: string }) => (
+  <div className={`w-8 h-8 bg-brand-400/20 rounded-full animate-pulse ${className}`} />
+);
+
 const THINKING_ROLES = [
   'CTO', 'CEO', 'CFO', 'Chief Risk Officer', 'Director of Operations',
   'VP of Operations', 'Head of Product Management', 'Head of Engineering',
@@ -407,51 +412,51 @@ export function HomePage() {
       </section>
 
       {/* Industries strip */}
-<section className="relative py-24 bg-dark-900/30">
-  <div className="max-w-7xl mx-auto px-6">
-    <Reveal>
-      <div className="text-center mb-12">
-        <span className="section-tag">INDUSTRIES WE SERVE</span>
-        <h2 className="text-3xl md:text-5xl font-bold text-white text-balance">
-          Deep domain expertise
-        </h2>
-      </div>
-    </Reveal>
-    <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-      {industries.length > 0 ? (
-        industries.map((ind, i) => {
-          // Use fallback if icon doesn't exist
-          const Icon = industryIcons[ind.slug] || FallbackIcon;
-          const isHovered = hoveredIndustry === ind.slug;
-          return (
-            <Reveal key={ind.slug} delay={i * 80}>
-              <Link
-                to={`/industries/${ind.slug}`}
-                className="card-tech group flex flex-col items-center text-center h-full"
-                onMouseEnter={() => setHoveredIndustry(ind.slug)}
-                onMouseLeave={() => setHoveredIndustry(null)}
-              >
-                <Icon
-                  className={`w-8 h-8 text-brand-400 mb-3 transition-all duration-500 ${
-                    isHovered ? 'scale-125 rotate-12 text-brand-300' : 'group-hover:scale-110'
-                  }`}
-                  aria-hidden="true"
-                />
-                <span className="text-white text-sm font-medium transition-colors duration-300 group-hover:text-brand-300">
-                  {ind.title}
-                </span>
-              </Link>
-            </Reveal>
-          );
-        })
-      ) : (
-        <p className="text-slate-400 col-span-full text-center py-8">
-          Loading industries...
-        </p>
-      )}
-    </div>
-  </div>
-</section>
+      <section className="relative py-24 bg-dark-900/30">
+        <div className="max-w-7xl mx-auto px-6">
+          <Reveal>
+            <div className="text-center mb-12">
+              <span className="section-tag">INDUSTRIES WE SERVE</span>
+              <h2 className="text-3xl md:text-5xl font-bold text-white text-balance">
+                Deep domain expertise
+              </h2>
+            </div>
+          </Reveal>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            {industries.length > 0 ? (
+              industries.map((ind, i) => {
+                // Use fallback if icon doesn't exist
+                const Icon = industryIcons[ind.slug] || FallbackIcon;
+                const isHovered = hoveredIndustry === ind.slug;
+                return (
+                  <Reveal key={ind.slug} delay={i * 80}>
+                    <Link
+                      to={`/industries/${ind.slug}`}
+                      className="card-tech group flex flex-col items-center text-center h-full"
+                      onMouseEnter={() => setHoveredIndustry(ind.slug)}
+                      onMouseLeave={() => setHoveredIndustry(null)}
+                    >
+                      <Icon
+                        className={`w-8 h-8 text-brand-400 mb-3 transition-all duration-500 ${
+                          isHovered ? 'scale-125 rotate-12 text-brand-300' : 'group-hover:scale-110'
+                        }`}
+                        aria-hidden="true"
+                      />
+                      <span className="text-white text-sm font-medium transition-colors duration-300 group-hover:text-brand-300">
+                        {ind.title}
+                      </span>
+                    </Link>
+                  </Reveal>
+                );
+              })
+            ) : (
+              <p className="text-slate-400 col-span-full text-center py-8">
+                Loading industries...
+              </p>
+            )}
+          </div>
+        </div>
+      </section>
 
       {/* Testimonials */}
       <section className="relative py-24 overflow-hidden">
