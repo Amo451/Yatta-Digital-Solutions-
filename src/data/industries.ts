@@ -1,4 +1,3 @@
-import type { ComponentType } from 'react';
 import {
   HeartPulse,
   Banknote,
@@ -14,7 +13,6 @@ export interface IndustryChallenge {
 
 export interface Industry {
   slug: string;
-  icon: ComponentType<{ className?: string; size?: number }>;
   title: string;
   tagline: string;
   description: string;
@@ -26,7 +24,6 @@ export interface Industry {
 export const industries: Industry[] = [
   {
     slug: 'healthcare',
-    icon: (props: { className?: string }) => <HeartPulse size={24} {...props} />,
     title: 'Healthcare',
     tagline: 'Better outcomes through intelligent systems.',
     description:
@@ -58,7 +55,6 @@ export const industries: Industry[] = [
   },
   {
     slug: 'finance',
-    icon: (props: { className?: string }) => <Banknote size={24} {...props} />,
     title: 'Finance & Banking',
     tagline: 'Precision, security, and speed for financial services.',
     description:
@@ -90,7 +86,6 @@ export const industries: Industry[] = [
   },
   {
     slug: 'retail',
-    icon: (props: { className?: string }) => <ShoppingBag size={24} {...props} />,
     title: 'Retail & E-Commerce',
     tagline: 'Personalized experiences that convert and retain.',
     description:
@@ -122,7 +117,6 @@ export const industries: Industry[] = [
   },
   {
     slug: 'manufacturing',
-    icon: (props: { className?: string }) => <Factory size={24} {...props} />,
     title: 'Manufacturing',
     tagline: 'Smart factories powered by connected data.',
     description:
@@ -154,7 +148,6 @@ export const industries: Industry[] = [
   },
   {
     slug: 'education',
-    icon: (props: { className?: string }) => <GraduationCap size={24} {...props} />,
     title: 'Education',
     tagline: 'Adaptive learning for every student.',
     description:
