@@ -1,10 +1,10 @@
+import type { ComponentType } from 'react';
 import {
   HeartPulse,
   Banknote,
   ShoppingBag,
   Factory,
   GraduationCap,
-  type LucideIcon,
 } from 'lucide-react';
 
 export interface IndustryChallenge {
@@ -14,7 +14,7 @@ export interface IndustryChallenge {
 
 export interface Industry {
   slug: string;
-  icon: LucideIcon;
+  icon: ComponentType<{ className?: string }>;
   title: string;
   tagline: string;
   description: string;
@@ -26,7 +26,7 @@ export interface Industry {
 export const industries: Industry[] = [
   {
     slug: 'healthcare',
-    icon: HeartPulse,
+    icon: ({ className = '' }: { className?: string }) => <HeartPulse className={className} />,
     title: 'Healthcare',
     tagline: 'Better outcomes through intelligent systems.',
     description:
@@ -58,7 +58,7 @@ export const industries: Industry[] = [
   },
   {
     slug: 'finance',
-    icon: Banknote,
+    icon: ({ className = '' }: { className?: string }) => <Banknote className={className} />,
     title: 'Finance & Banking',
     tagline: 'Precision, security, and speed for financial services.',
     description:
@@ -90,7 +90,7 @@ export const industries: Industry[] = [
   },
   {
     slug: 'retail',
-    icon: ShoppingBag,
+    icon: ({ className = '' }: { className?: string }) => <ShoppingBag className={className} />,
     title: 'Retail & E-Commerce',
     tagline: 'Personalized experiences that convert and retain.',
     description:
@@ -122,7 +122,7 @@ export const industries: Industry[] = [
   },
   {
     slug: 'manufacturing',
-    icon: Factory,
+    icon: ({ className = '' }: { className?: string }) => <Factory className={className} />,
     title: 'Manufacturing',
     tagline: 'Smart factories powered by connected data.',
     description:
@@ -154,7 +154,7 @@ export const industries: Industry[] = [
   },
   {
     slug: 'education',
-    icon: GraduationCap,
+    icon: ({ className = '' }: { className?: string }) => <GraduationCap className={className} />,
     title: 'Education',
     tagline: 'Adaptive learning for every student.',
     description:
