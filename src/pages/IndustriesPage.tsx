@@ -1,3 +1,4 @@
+```tsx
 import { useState, type ComponentType } from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -31,23 +32,66 @@ const FallbackIcon = ({
   className = '',
   size = 28,
 }: IconProps) => {
+  const sizeClass =
+    size === 28 ? 'w-7 h-7' : 'w-8 h-8';
+
   return (
     <div
-      className={`rounded-full bg-brand-400/20 animate-pulse ${className}`}
-      style={{
-        width: size,
-        height: size,
-      }}
+      className={`${sizeClass} bg-brand-400/20 rounded-full animate-pulse ${className}`}
       aria-hidden="true"
     />
   );
 };
 
 export function IndustriesPage() {
-  const [hoveredIndustry, setHoveredIndustry] = useState<string | null>(null);
+  const [hoveredIndustry, setHoveredIndustry] =
+    useState<string | null>(null);
 
-  // Defensive check in case the data file is malformed
+  // =====================================================
+  // DEBUG: Check imported components, icons and data
+  // =====================================================
+
+  console.log('====================================');
+  console.log('       INDUSTRIES PAGE DEBUG');
+  console.log('====================================');
+
+  console.log('industries:', industries);
+  console.log(
+    'industries is array:',
+    Array.isArray(industries)
+  );
+  console.log(
+    'industries length:',
+    industries?.length
+  );
+
+  console.log('PageHeader:', PageHeader);
+  console.log('Reveal:', Reveal);
+  console.log('CTASection:', CTASection);
+
+  console.log('HeartPulse:', HeartPulse);
+  console.log('Banknote:', Banknote);
+  console.log('ShoppingBag:', ShoppingBag);
+  console.log('Factory:', Factory);
+  console.log('GraduationCap:', GraduationCap);
+  console.log('ArrowRight:', ArrowRight);
+
+  console.log('industryIcons:', industryIcons);
+
+  console.log('====================================');
+  console.log('       END MAIN DEBUG');
+  console.log('====================================');
+
+  // =====================================================
+  // Defensive check for industries data
+  // =====================================================
+
   if (!Array.isArray(industries)) {
+    console.error(
+      '❌ ERROR: industries is not an array!',
+      industries
+    );
+
     return (
       <>
         <PageHeader
@@ -90,26 +134,63 @@ export function IndustriesPage() {
           {industries.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {industries.map((ind, i) => {
-                if (!ind || !ind.slug) {
-                  return null;
-                }
+                // =================================================
+                // DEBUG: Check every industry item
+                // =================================================
+
+                console.log(
+                  '------------------------------------'
+                );
+                console.log(
+                  `INDUSTRY ITEM ${i + 1}`
+                );
+                console.log('ind:', ind);
+                console.log(
+                  'slug:',
+                  ind?.slug
+                );
+                console.log(
+                  'title:',
+                  ind?.title
+                );
+                console.log(
+                  'description:',
+                  ind?.description
+                );
+
+                const matchingIcon =
+                  ind?.slug
+                    ? industryIcons[ind.slug]
+                    : undefined;
+
+                console.log(
+                  'matching icon:',
+                  matchingIcon
+                );
 
                 const Icon =
-                  industryIcons[ind.slug] ?? FallbackIcon;
+                  matchingIcon ?? FallbackIcon;
+
+                console.log(
+                  'final Icon:',
+                  Icon
+                );
 
                 const isHovered =
                   hoveredIndustry === ind.slug;
 
                 return (
                   <Reveal
-                    key={ind.slug}
+                    key={ind.slug || `industry-${i}`}
                     delay={i * 80}
                   >
                     <Link
                       to={`/industries/${ind.slug}`}
                       className="card-tech group block h-full"
                       onMouseEnter={() =>
-                        setHoveredIndustry(ind.slug)
+                        setHoveredIndustry(
+                          ind.slug
+                        )
                       }
                       onMouseLeave={() =>
                         setHoveredIndustry(null)
@@ -166,3 +247,4 @@ export function IndustriesPage() {
     </>
   );
 }
+```
