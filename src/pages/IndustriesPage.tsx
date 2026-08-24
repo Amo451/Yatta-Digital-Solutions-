@@ -25,9 +25,11 @@ const industryIcons: Record<string, React.ComponentType<{ className?: string; si
 // Fallback icon component - used if an icon is missing
 const FallbackIcon = ({ className = '', size = 28 }: { className?: string; size?: number }) => (
   <div 
-    className={`w-${size === 28 ? '7' : '8'} h-${size === 28 ? '7' : '8'} bg-brand-400/20 rounded-full animate-pulse ${className}`}
+    className={`text-brand-400 transition-all duration-500 ${className}`}
     style={{ width: size, height: size }}
-  />
+  >
+    <div className="w-full h-full bg-brand-400/20 rounded-full animate-pulse" />
+  </div>
 );
 
 export function IndustriesPage() {
