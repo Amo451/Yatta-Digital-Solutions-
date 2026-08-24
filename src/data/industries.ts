@@ -1,4 +1,5 @@
 import type { ComponentType } from 'react';
+import { cloneElement } from 'react';
 import {
   HeartPulse,
   Banknote,
@@ -23,17 +24,20 @@ export interface Industry {
   services: string[];
 }
 
-// Helper function to create icon wrappers
-const createIcon = (IconComponent: ComponentType<{ className?: string; size?: number }>) => {
-  return ({ className = '' }: { className?: string }) => (
-    <IconComponent className={className} size={24} />
-  );
+// Helper function that creates a React component wrapper
+const wrapIcon = (Icon: ComponentType<{ className?: string; size?: number }>) => {
+  return ({ className = '', size = 24 }: { className?: string; size?: number }) => {
+    return cloneElement(
+      <Icon size={size} />,
+      { className }
+    );
+  };
 };
 
 export const industries: Industry[] = [
   {
     slug: 'healthcare',
-    icon: createIcon(HeartPulse),
+    icon: wrapIcon(HeartPulse),
     title: 'Healthcare',
     tagline: 'Better outcomes through intelligent systems.',
     description:
@@ -65,7 +69,7 @@ export const industries: Industry[] = [
   },
   {
     slug: 'finance',
-    icon: createIcon(Banknote),
+    icon: wrapIcon(Banknote),
     title: 'Finance & Banking',
     tagline: 'Precision, security, and speed for financial services.',
     description:
@@ -97,7 +101,7 @@ export const industries: Industry[] = [
   },
   {
     slug: 'retail',
-    icon: createIcon(ShoppingBag),
+    icon: wrapIcon(ShoppingBag),
     title: 'Retail & E-Commerce',
     tagline: 'Personalized experiences that convert and retain.',
     description:
@@ -129,7 +133,7 @@ export const industries: Industry[] = [
   },
   {
     slug: 'manufacturing',
-    icon: createIcon(Factory),
+    icon: wrapIcon(Factory),
     title: 'Manufacturing',
     tagline: 'Smart factories powered by connected data.',
     description:
@@ -161,7 +165,7 @@ export const industries: Industry[] = [
   },
   {
     slug: 'education',
-    icon: createIcon(GraduationCap),
+    icon: wrapIcon(GraduationCap),
     title: 'Education',
     tagline: 'Adaptive learning for every student.',
     description:
