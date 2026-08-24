@@ -14,7 +14,7 @@ export interface IndustryChallenge {
 
 export interface Industry {
   slug: string;
-  icon: ComponentType<{ className?: string }>;
+  icon: ComponentType<{ className?: string; size?: number }>;
   title: string;
   tagline: string;
   description: string;
@@ -23,10 +23,17 @@ export interface Industry {
   services: string[];
 }
 
+// Helper function to create icon wrappers
+const createIcon = (IconComponent: ComponentType<{ className?: string; size?: number }>) => {
+  return ({ className = '' }: { className?: string }) => (
+    <IconComponent className={className} size={24} />
+  );
+};
+
 export const industries: Industry[] = [
   {
     slug: 'healthcare',
-    icon: ({ className = '' }: { className?: string }) => <HeartPulse className={className} />,
+    icon: createIcon(HeartPulse),
     title: 'Healthcare',
     tagline: 'Better outcomes through intelligent systems.',
     description:
@@ -58,7 +65,7 @@ export const industries: Industry[] = [
   },
   {
     slug: 'finance',
-    icon: ({ className = '' }: { className?: string }) => <Banknote className={className} />,
+    icon: createIcon(Banknote),
     title: 'Finance & Banking',
     tagline: 'Precision, security, and speed for financial services.',
     description:
@@ -90,7 +97,7 @@ export const industries: Industry[] = [
   },
   {
     slug: 'retail',
-    icon: ({ className = '' }: { className?: string }) => <ShoppingBag className={className} />,
+    icon: createIcon(ShoppingBag),
     title: 'Retail & E-Commerce',
     tagline: 'Personalized experiences that convert and retain.',
     description:
@@ -122,7 +129,7 @@ export const industries: Industry[] = [
   },
   {
     slug: 'manufacturing',
-    icon: ({ className = '' }: { className?: string }) => <Factory className={className} />,
+    icon: createIcon(Factory),
     title: 'Manufacturing',
     tagline: 'Smart factories powered by connected data.',
     description:
@@ -154,7 +161,7 @@ export const industries: Industry[] = [
   },
   {
     slug: 'education',
-    icon: ({ className = '' }: { className?: string }) => <GraduationCap className={className} />,
+    icon: createIcon(GraduationCap),
     title: 'Education',
     tagline: 'Adaptive learning for every student.',
     description:
