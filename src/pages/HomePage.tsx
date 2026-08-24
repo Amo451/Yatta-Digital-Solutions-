@@ -423,7 +423,7 @@ export function HomePage() {
             </div>
           </Reveal>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {industries.length > 0 ? (
+            {industries && industries.length > 0 ? (
               industries.map((ind, i) => {
                 // Use fallback if icon doesn't exist
                 const Icon = industryIcons[ind.slug] || FallbackIcon;
@@ -436,12 +436,16 @@ export function HomePage() {
                       onMouseEnter={() => setHoveredIndustry(ind.slug)}
                       onMouseLeave={() => setHoveredIndustry(null)}
                     >
-                      <Icon
-                        className={`w-8 h-8 text-brand-400 mb-3 transition-all duration-500 ${
-                          isHovered ? 'scale-125 rotate-12 text-brand-300' : 'group-hover:scale-110'
-                        }`}
-                        aria-hidden="true"
-                      />
+                      {Icon ? (
+                        <Icon
+                          className={`w-8 h-8 text-brand-400 mb-3 transition-all duration-500 ${
+                            isHovered ? 'scale-125 rotate-12 text-brand-300' : 'group-hover:scale-110'
+                          }`}
+                          aria-hidden="true"
+                        />
+                      ) : (
+                        <div className="w-8 h-8 bg-brand-400/20 rounded-full animate-pulse mb-3" />
+                      )}
                       <span className="text-white text-sm font-medium transition-colors duration-300 group-hover:text-brand-300">
                         {ind.title}
                       </span>
