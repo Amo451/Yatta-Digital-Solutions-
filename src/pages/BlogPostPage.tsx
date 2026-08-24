@@ -13,8 +13,8 @@ export function BlogPostPage() {
     return (
       <div className="pt-32 pb-20 text-center">
         <p className="text-slate-400 mb-4">Article not found.</p>
-        <Link to="/blog" className="btn-outline">
-          <ArrowLeft className="w-4 h-4" /> Back to Insights
+        <Link to="/blog" className="btn-outline inline-flex items-center gap-2">
+          <ArrowLeft className="w-4 h-4" aria-hidden="true" /> Back to Insights
         </Link>
       </div>
     );
@@ -40,14 +40,14 @@ export function BlogPostPage() {
         <div className="max-w-3xl mx-auto px-6">
           <div className="flex flex-wrap items-center gap-5 text-sm text-slate-500">
             <span className="flex items-center gap-2">
-              <User className="w-4 h-4" /> {post.author}
+              <User className="w-4 h-4" aria-hidden="true" /> {post.author || 'Yatta Team'}
             </span>
             <span className="flex items-center gap-2">
-              <Calendar className="w-4 h-4" />{' '}
+              <Calendar className="w-4 h-4" aria-hidden="true" />{' '}
               {new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
             </span>
             <span className="flex items-center gap-2">
-              <Clock className="w-4 h-4" /> {post.readTime}
+              <Clock className="w-4 h-4" aria-hidden="true" /> {post.readTime}
             </span>
           </div>
         </div>
@@ -57,11 +57,17 @@ export function BlogPostPage() {
       <article className="relative py-16">
         <div className="max-w-3xl mx-auto px-6">
           <div className="space-y-6">
-            {post.content.map((para, i) => (
-              <Reveal key={i} delay={i * 40}>
-                <p className="text-slate-300 text-lg leading-[1.8]">{para}</p>
-              </Reveal>
-            ))}
+            {post.content && Array.isArray(post.content) ? (
+              post.content.map((para, i) => (
+                <Reveal key={i} delay={i * 40}>
+                  <p className="text-slate-300 text-lg leading-[1.8]">{para}</p>
+                </Reveal>
+              ))
+            ) : (
+              <p className="text-slate-300 text-lg leading-[1.8]">
+                {typeof post.content === 'string' ? post.content : 'Full content coming soon...'}
+              </p>
+            )}
           </div>
         </div>
       </article>
@@ -73,20 +79,28 @@ export function BlogPostPage() {
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-8">Keep reading</h2>
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {otherPosts.map((p, i) => (
-              <Reveal key={p.slug} delay={i * 80}>
-                <Link to={`/blog/${p.slug}`} className="card-tech group block h-full">
-                  <span className="text-xs font-mono text-brand-400 mb-3 block">{p.category}</span>
-                  <h3 className="text-white font-semibold mb-3 group-hover:text-brand-300 transition-colors">
-                    {p.title}
-                  </h3>
-                  <p className="text-slate-400 text-sm leading-relaxed mb-3">{p.excerpt}</p>
-                  <span className="text-brand-400 text-sm inline-flex items-center gap-1 group-hover:gap-2 transition-all">
-                    Read more <ArrowRight className="w-4 h-4" />
-                  </span>
-                </Link>
-              </Reveal>
-            ))}
+            {otherPosts.length > 0 ? (
+              otherPosts.map((p, i) => (
+                <Reveal key={p.slug} delay={i * 80}>
+                  <Link to={`/blog/${p.slug}`} className="card-tech group block h-full">
+                    <span className="text-xs font-mono text-brand-400 mb-3 block transition-all duration-300 group-hover:text-brand-300 group-hover:translate-x-1">
+                      {p.category}
+                    </span>
+                    <h3 className="text-white font-semibold mb-3 group-hover:text-brand-300 transition-colors duration-300">
+                      {p.title}
+                    </h3>
+                    <p className="text-slate-400 text-sm leading-relaxed mb-3 transition-colors duration-300 group-hover:text-slate-300">
+                      {p.excerpt}
+                    </p>
+                    <span className="text-brand-400 text-sm inline-flex items-center gap-1 group-hover:gap-2 transition-all duration-300">
+                      Read more <ArrowRight className="w-4 h-4 transition-all duration-300 group-hover:translate-x-1 group-hover:scale-110" aria-hidden="true" />
+                    </span>
+                  </Link>
+                </Reveal>
+              ))
+            ) : (
+              <p className="text-slate-400 col-span-full text-center py-8">No other posts yet.</p>
+            )}
           </div>
         </div>
       </section>
