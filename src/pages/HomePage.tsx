@@ -8,6 +8,11 @@ import {
   ShieldCheck,
   TrendingUp,
   Quote,
+  HeartPulse,
+  Banknote,
+  ShoppingBag,
+  Factory,
+  GraduationCap,
 } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import { CTASection } from '@/components/CTASection';
@@ -21,6 +26,15 @@ import {
   AwardStatIcon,
 } from '@/components/StatIcons';
 import { useState } from 'react';
+
+// Map industry slugs to their icons
+const industryIcons: Record<string, React.ComponentType<{ className?: string; size?: number }>> = {
+  healthcare: HeartPulse,
+  finance: Banknote,
+  retail: ShoppingBag,
+  manufacturing: Factory,
+  education: GraduationCap,
+};
 
 const THINKING_ROLES = [
   'CTO', 'CEO', 'CFO', 'Chief Risk Officer', 'Director of Operations',
@@ -406,6 +420,7 @@ export function HomePage() {
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {industries.length > 0 ? (
               industries.map((ind, i) => {
+                const Icon = industryIcons[ind.slug];
                 const isHovered = hoveredIndustry === ind.slug;
                 return (
                   <Reveal key={ind.slug} delay={i * 80}>
@@ -415,11 +430,11 @@ export function HomePage() {
                       onMouseEnter={() => setHoveredIndustry(ind.slug)}
                       onMouseLeave={() => setHoveredIndustry(null)}
                     >
-                      <ind.icon 
+                      <Icon
                         className={`w-8 h-8 text-brand-400 mb-3 transition-all duration-500 ${
                           isHovered ? 'scale-125 rotate-12 text-brand-300' : 'group-hover:scale-110'
-                        }`} 
-                        aria-hidden="true" 
+                        }`}
+                        aria-hidden="true"
                       />
                       <span className="text-white text-sm font-medium transition-colors duration-300 group-hover:text-brand-300">
                         {ind.title}
