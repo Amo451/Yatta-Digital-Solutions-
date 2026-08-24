@@ -1,9 +1,29 @@
 import { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import {
+  Menu,
+  X,
+  ChevronDown,
+  HeartPulse,
+  Banknote,
+  ShoppingBag,
+  Factory,
+  GraduationCap,
+} from 'lucide-react';
 import { services } from '@/data/services';
 import { industries } from '@/data/industries';
 import { YattaLogo } from '@/components/YattaLogo';
+
+// Map industry slugs to their icons (industries.ts has no `icon` field,
+// so this mapping is required here — mirrors the one used in
+// HomePage.tsx / IndustriesPage.tsx)
+const industryIcons: Record<string, React.ComponentType<{ className?: string; size?: number }>> = {
+  healthcare: HeartPulse,
+  finance: Banknote,
+  retail: ShoppingBag,
+  manufacturing: Factory,
+  education: GraduationCap,
+};
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -91,21 +111,26 @@ export function Header() {
               {industriesOpen && (
                 <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-64">
                   <div className="glass rounded-xl p-2 shadow-2xl">
-                    {industries.map((i) => (
-                      <Link
-                        key={i.slug}
-                        to={`/industries/${i.slug}`}
-                        className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
-                      >
-                        <i.icon className="w-5 h-5 text-brand-400 mt-0.5 shrink-0" />
-                        <div>
-                          <div className="text-white text-sm font-medium group-hover:text-brand-300">
-                            {i.title}
+                    {industries.map((i) => {
+                      const Icon = industryIcons[i.slug];
+                      return (
+                        <Link
+                          key={i.slug}
+                          to={`/industries/${i.slug}`}
+                          className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
+                        >
+                          {Icon && (
+                            <Icon className="w-5 h-5 text-brand-400 mt-0.5 shrink-0" />
+                          )}
+                          <div>
+                            <div className="text-white text-sm font-medium group-hover:text-brand-300">
+                              {i.title}
+                            </div>
+                            <div className="text-slate-500 text-xs">{i.tagline}</div>
                           </div>
-                          <div className="text-slate-500 text-xs">{i.tagline}</div>
-                        </div>
-                      </Link>
-                    ))}
+                        </Link>
+                      );
+                    })}
                   </div>
                 </div>
               )}
