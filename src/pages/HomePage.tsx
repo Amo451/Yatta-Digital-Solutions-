@@ -407,50 +407,50 @@ export function HomePage() {
       </section>
 
       {/* Industries strip */}
-      <section className="relative py-24 bg-dark-900/30">
-        <div className="max-w-7xl mx-auto px-6">
-          <Reveal>
-            <div className="text-center mb-12">
-              <span className="section-tag">INDUSTRIES WE SERVE</span>
-              <h2 className="text-3xl md:text-5xl font-bold text-white text-balance">
-                Deep domain expertise
-              </h2>
-            </div>
-          </Reveal>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {industries.length > 0 ? (
-              industries.map((ind, i) => {
-                const Icon = industryIcons[ind.slug];
-                const isHovered = hoveredIndustry === ind.slug;
-                return (
-                  <Reveal key={ind.slug} delay={i * 80}>
-                    <Link
-                      to={`/industries/${ind.slug}`}
-                      className="card-tech group flex flex-col items-center text-center h-full"
-                      onMouseEnter={() => setHoveredIndustry(ind.slug)}
-                      onMouseLeave={() => setHoveredIndustry(null)}
-                    >
-                      <Icon
-                        className={`w-8 h-8 text-brand-400 mb-3 transition-all duration-500 ${
-                          isHovered ? 'scale-125 rotate-12 text-brand-300' : 'group-hover:scale-110'
-                        }`}
-                        aria-hidden="true"
-                      />
-                      <span className="text-white text-sm font-medium transition-colors duration-300 group-hover:text-brand-300">
-                        {ind.title}
-                      </span>
-                    </Link>
-                  </Reveal>
-                );
-              })
-            ) : (
-              <p className="text-slate-400 col-span-full text-center py-8">
-                Loading industries...
-              </p>
-            )}
-          </div>
-        </div>
-      </section>
+<section className="relative py-24 bg-dark-900/30">
+  <div className="max-w-7xl mx-auto px-6">
+    <Reveal>
+      <div className="text-center mb-12">
+        <span className="section-tag">INDUSTRIES WE SERVE</span>
+        <h2 className="text-3xl md:text-5xl font-bold text-white text-balance">
+          Deep domain expertise
+        </h2>
+      </div>
+    </Reveal>
+    <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+      {industries.length > 0 ? (
+        industries.map((ind, i) => {
+          const Icon = industryIcons[ind.slug] || FallbackIcon; // Add fallback
+          const isHovered = hoveredIndustry === ind.slug;
+          return (
+            <Reveal key={ind.slug} delay={i * 80}>
+              <Link
+                to={`/industries/${ind.slug}`}
+                className="card-tech group flex flex-col items-center text-center h-full"
+                onMouseEnter={() => setHoveredIndustry(ind.slug)}
+                onMouseLeave={() => setHoveredIndustry(null)}
+              >
+                <Icon
+                  className={`w-8 h-8 text-brand-400 mb-3 transition-all duration-500 ${
+                    isHovered ? 'scale-125 rotate-12 text-brand-300' : 'group-hover:scale-110'
+                  }`}
+                  aria-hidden="true"
+                />
+                <span className="text-white text-sm font-medium transition-colors duration-300 group-hover:text-brand-300">
+                  {ind.title}
+                </span>
+              </Link>
+            </Reveal>
+          );
+        })
+      ) : (
+        <p className="text-slate-400 col-span-full text-center py-8">
+          Loading industries...
+        </p>
+      )}
+    </div>
+  </div>
+</section>
 
       {/* Testimonials */}
       <section className="relative py-24 overflow-hidden">
