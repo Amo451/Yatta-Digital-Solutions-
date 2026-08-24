@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
-import { ArrowRight, ArrowLeft, Check, Lightbulb } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Check, Lightbulb, AlertTriangle } from 'lucide-react';
 import { PageHeader } from '@/components/PageHeader';
 import { Reveal } from '@/components/Reveal';
 import { CTASection } from '@/components/CTASection';
@@ -49,7 +49,10 @@ export function IndustryDetailPage() {
                     <div className="md:w-1/3">
                       <div className="flex items-center gap-3 mb-2">
                         <div className="w-8 h-8 rounded-lg bg-red-500/10 flex items-center justify-center transition-all duration-500 group-hover:bg-red-500/20 group-hover:scale-110 group-hover:rotate-3">
-                          <span className="text-red-400 font-mono text-sm font-bold transition-all duration-500 group-hover:scale-125 group-hover:rotate-12">!</span>
+                          <AlertTriangle
+                            className="w-4 h-4 text-red-400 transition-all duration-500 group-hover:scale-125 group-hover:rotate-12"
+                            aria-hidden="true"
+                          />
                         </div>
                         <h3 className="text-white font-semibold transition-colors duration-300 group-hover:text-brand-300">{c.title}</h3>
                       </div>
