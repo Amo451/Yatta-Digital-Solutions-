@@ -420,7 +420,8 @@ export function HomePage() {
     <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
       {industries.length > 0 ? (
         industries.map((ind, i) => {
-          const Icon = industryIcons[ind.slug] || FallbackIcon; // Add fallback
+          // Use fallback if icon doesn't exist
+          const Icon = industryIcons[ind.slug] || FallbackIcon;
           const isHovered = hoveredIndustry === ind.slug;
           return (
             <Reveal key={ind.slug} delay={i * 80}>
